@@ -9,9 +9,10 @@
   (add-to-list 'eglot-server-programs '(c-mode . ("clangd")))
   (add-to-list 'eglot-server-programs '(python-mode . ("jedi-language-server")))
   (add-to-list 'eglot-server-programs
-             '(yaml-mode . ("node" "/home/david/Downloads/git/yaml-language-server/out/server/src/server.js" "--stdio")))
+               '(yaml-mode . ("node" "/home/david/Downloads/git/yaml-language-server/out/server/src/server.js" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(typescript-mode . ("/home/david/.nvm/versions/node/v18.20.3/bin/typescript-language-server" "--stdio"))))
 
-  )
 (use-package eglot-booster
 	:after eglot
 	:config	(eglot-booster-mode))
@@ -42,25 +43,25 @@
       (pyvenv-activate (expand-file-name "venv" venv-path)))))
 
 (defun my-hs-ensure()
-  "Ensure hide show is activate in relevant programming major modes." 
+  "Ensure hide show is activate in relevant programming major modes."
   (hs-minor-mode))
 
 (defun my-python-setup()
-  "Ensures: eglot, hide-show"
+  "Ensures: eglot, hide-show."
   (my-auto-activate-venv)
   (my-eglot-ensure)
-  (my-hs-ensure)) 
+  (my-hs-ensure))
 
 (defun my-typescript-setup()
-  "Ensures: eglot, hide-show"
+  "Ensures: eglot, hide-show."
   (my-eglot-ensure)
   (my-hs-ensure))
 
 (defun my-text-setup()
+  "Ensures: Olivetti mode."
   (olivetti-mode))
 
-(add-hook 'python-mode-hook #'my-python-setup)
-(add-hook 'typescript-mode-hook #'my-typescript-setup)
-(add-hook 'js-mode-hook #'my-eglot-ensure)
-(add-hook 'text-mode-hook #'my-text-setup)
-
+(add-hook 'python-mode-hook 'my-python-setup)
+(add-hook 'typescript-mode-hook 'my-typescript-setup)
+(add-hook 'js-mode-hook 'my-eglot-ensure)
+(add-hook 'text-mode-hook 'my-text-setup)
