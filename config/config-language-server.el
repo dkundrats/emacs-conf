@@ -65,3 +65,5 @@
 (add-hook 'typescript-mode-hook 'my-typescript-setup)
 (add-hook 'js-mode-hook 'my-eglot-ensure)
 (add-hook 'text-mode-hook 'my-text-setup)
+(add-hook 'c-mode-hook #'lsp)
+(add-hook 'c-mode-hook 'my-hs-ensure)
