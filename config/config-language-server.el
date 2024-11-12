@@ -67,3 +67,6 @@
 (add-hook 'text-mode-hook 'my-text-setup)
 (add-hook 'c-mode-hook #'lsp)
 (add-hook 'c-mode-hook 'my-hs-ensure)
+(add-hook 'c-mode-hook #'smartparens-mode)
+(add-hook 'typescript-mode-hook #'smartparens-mode)
+(add-hook 'js-mode-hook #'smartparens-mode)
