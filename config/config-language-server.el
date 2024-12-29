@@ -1,3 +1,10 @@
+(use-package smartparens
+  :ensure smartparens  ;; install the package
+  :hook (prog-mode text-mode markdown-mode python-mode-hook, c-mode-hook, typescript-mode-hook, scheme-mode-hook) ;; add `smartparens-mode` to these hooks
+  :config
+  ;; load default config
+  (require 'smartparens-config))
+
 ;; flycheck
 (use-package flycheck
   :ensure t
