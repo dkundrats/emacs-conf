@@ -17,6 +17,10 @@
 
 (setq org-agenda-files '("~/org/sprint.org"))
 
+(use-package timu-rouge-theme
+        :ensure t
+        :config
+        (load-theme 'timu-rouge t))
 ;; No sound
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
@@ -38,7 +42,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c"
+   '("3d8d455e121653677815b0b5e2f2dacc8581e26bbba9558aa8714f97c524ba0e"
+     "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c"
      "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3"
      default))
  '(gdb-many-windows t)
@@ -49,17 +54,19 @@
      ("melpa" . "https://melpa.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(## all-the-icons counsel counsel-projectile dap-mode dape dashboard
-	ef-themes eglot eglot-booster elpy flycheck flycheck-rust
-	geiser-mit gptel ivy lsp-pyright lsp-ui magit nerd-icons
+   '(## all-the-icons clang-format clang-format+ counsel
+	counsel-projectile dap-mode dape dashboard ef-themes eglot
+	eglot-booster elpy flycheck flycheck-rust geiser-mit gptel ivy
+	lsp-pyright lsp-ui magit nerd-icons nerd-icons-ivy-rich
 	olivetti page-break-lines pdf-tools py-autopep8 py-isort
-	rainbow-identifiers rust-mode rustic smartparens
-	solarized-theme treemacs treemacs-evil treemacs-icons-dired
-	treemacs-persp treemacs-projectile treemacs-tab-bar
-	typescript-mode use-package vterm vterm-toggle zenburn-theme))
+	pyenv-mode pyvenv rainbow-identifiers rust-mode rustic
+	smartparens solarized-theme timu-rouge-theme treemacs
+	treemacs-evil treemacs-icons-dired treemacs-persp
+	treemacs-projectile treemacs-tab-bar typescript-mode
+	use-package vterm vterm-toggle zenburn-theme))
  '(package-vc-selected-packages
    '((eglot-booster :vc-backend Git :url
-		    "https://github.com/jdtsmith/eglot-booster")))
+		    "https://github.com/jdtsmith/eglot-booster.git")))
  '(warning-suppress-log-types '((comp))))
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -72,3 +79,4 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "0xProto Nerd Font Mono" :foundry "0xTy" :slant normal :weight regular :height 113 :width normal)))))
 
+(setq x-super-keysym 'capslock)

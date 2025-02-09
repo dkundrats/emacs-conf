@@ -30,4 +30,5 @@
 (package-initialize)
 
 ;; Load the theme
-(load-theme 'zenburn t)
+;;(load-theme 'zenburn t)
+

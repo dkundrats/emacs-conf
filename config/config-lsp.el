@@ -24,7 +24,7 @@
 
   ;; Configure LSP servers
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("clangd"))
+   (make-lsp-client :new-connection (lsp-stdio-connection '("emacs-lsp-booster" "--" "clangd"))
                     :major-modes '(c-mode)
                     :server-id 'clangd))
 
@@ -44,13 +44,15 @@
   :config
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-position 'at-point
-        lsp-ui-sideline-enable nil))  ;; Disable sideline if not needed
+        lsp-ui-sideline-enable t))  ;; Disable sideline if not needed
 
 (defun disable-flycheck-in-rust-mode ()
   (flycheck-mode -1))
 
 (add-hook 'rust-mode-hook #'disable-flycheck-in-rust-mode)
 (setq lsp-pyright-typechecking-mode "basic")  ;; Can also be 'off' or 'strict'
+
+(setq rustic-analyzer-command '("emacs-lsp-booster -- ~/.cargo/bin/rust-analyzer"))
 
 ;; DAP mode for debugging
 (use-package dap-mode
@@ -61,3 +63,8 @@
   (dap-ui-controls-mode 1)
   (require 'dap-chrome)
   (require 'dap-node))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))

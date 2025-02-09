@@ -13,25 +13,28 @@
 (use-package nerd-icons :ensure t)
 (use-package all-the-icons :ensure t)
 
-(use-package dashboard
-    :config
-        (dashboard-setup-startup-hook)
-    :custom
-        (dashboard-startup-banner 'logo)
-        (dashboard-banner-logo-title nil)
-        (dashboard-center-content t)
-        (dashboard-icon-type 'all-the-icons)
-        (dashboard-set-heading-icons t)
-        (dashboard-set-file-icons t)
-        (dashboard-set-footer nil)
-        (dashboard-projects-backend 'projectile)
-        (dashboard-display-icons-p t)
-        (dashboard-items '(
-            (recents . 5)
-            (agenda . 5)
-            (projects . 5)
-            (bookmarks . 5)))
-	(setq dashboard-agenda-time-span 7))
+;; (use-package dashboard
+;;   :ensure t
+;;   :init
+;;   (setq initial-buffer-choice 'dashboard-open)
+;;   :config
+;;   (dashboard-setup-startup-hook)
+;;    :custom
+;;   (dashboard-display-icons-p t)
+;;   (dashboard-icon-type 'all-the-icons)
+;;   (dashboard-set-heading-icons t)
+;;   (dashboard-set-file-icons t)
+;;   (dashboard-startup-banner 'logo)
+;;   (dashboard-vertically-center-content t)
+;;   (dashboard-center-content t)
+;;   (dashboard-items '((recents   . 5)
+;;                      (agenda    . 5)))
+;;   (dashboard-startupify-list '(dashboard-insert-banner
+;;                      dashboard-insert-newline
+;;                      dashboard-insert-banner-title
+;;                      dashboard-insert-init-info
+;;                      dashboard-insert-newline
+;;                      dashboard-insert-items)))
 
 ;; PDF Tools
 (pdf-tools-install)

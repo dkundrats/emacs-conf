@@ -5,4 +5,4 @@
 (use-package all-the-icons :ensure t)
 
 ;; Load the theme
-(load-theme 'zenburn t)
+;;(load-theme 'zenburn t)
