@@ -8,7 +8,7 @@
 (load "config-packages")           ;; Load package management settings
 (load "config-projectile")         ;; Load configuration for Projectile (project management)
 (load "config-ui-misc")            ;; Load miscellaneous UI customizations
-
+(load "config-gptel.el")             ;; Load GPTEL Azure backend
 ;; Set the auth sources for authentication
 (setq auth-sources '("~/.authinfo")) ;; Specify location of auth info
 ```
