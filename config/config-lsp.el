@@ -68,3 +68,7 @@
   :ensure t
   :config
   (yas-global-mode 1))
+
+;; Define a custom key binding for eldoc-doc-buffer
+(global-set-key (kbd "C-c d") 'eldoc-doc-buffer)  ;; You can change C-c d to another key combo
+

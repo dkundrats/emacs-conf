@@ -1,0 +1,13 @@
+auto-save-list/*
+.cache/*
+eln-cache/*
+.git/*
+quelpa/*
+snippets/*
+transient/*
+elpa/*
+.projectile
+project*
+recentf
+.dap-breakpoints*
+.lsp-session-v1

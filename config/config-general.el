@@ -8,6 +8,7 @@
 (global-set-key (kbd "C-c i") 'helm-imenu)
 ;; gptel send
 (global-set-key (kbd "C-c g") 'gptel-send)
+(global-set-key (kbd "C-c m") 'gptel-menu)
 ;; helm find pattern
 (global-set-key (kbd "C-c h") 'helm-occur)
 

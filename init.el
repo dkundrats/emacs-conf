@@ -11,16 +11,16 @@
 (load "config-gptel.el")             ;; Load GPTEL Azure backend
 ;; Set the auth sources for authentication
 (setq auth-sources '("~/.authinfo")) ;; Specify location of auth info
-```
+
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 (setq org-agenda-files '("~/org/sprint.org"))
 
-(use-package timu-rouge-theme
-        :ensure t
-        :config
-        (load-theme 'timu-rouge t))
+(require 'ef-themes)
+
+(load-theme 'ef-elea-dark :no-confirm)
+
 ;; No sound
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
