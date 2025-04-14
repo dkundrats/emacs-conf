@@ -69,6 +69,11 @@
   :config
   (yas-global-mode 1))
 
-;; Define a custom key binding for eldoc-doc-buffer
-(global-set-key (kbd "C-c d") 'eldoc-doc-buffer)  ;; You can change C-c d to another key combo
+(defun show-static-lsp-doc ()
+  "Show LSP documentation for thing at point in a static buffer."
+  (interactive)
+  (if (fboundp 'lsp-describe-thing-at-point)
+      (lsp-describe-thing-at-point)
+    (message "LSP mode not available")))
 
+(global-set-key (kbd "C-c d") 'show-static-lsp-doc)
