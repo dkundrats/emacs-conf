@@ -11,7 +11,7 @@
 (global-set-key (kbd "C-c m") 'gptel-menu)
 ;; helm find pattern
 (global-set-key (kbd "C-c h") 'helm-occur)
-
+(global-set-key (kbd "C-c v") 'vterm)
 ;; Org Agenda
 (setq org-agenda-files '("~/org/sprint.org"))
 
