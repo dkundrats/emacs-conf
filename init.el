@@ -3,7 +3,7 @@
 
 (load "config-dape")               ;; Load configuration for DAP (Debug Adapter Protocol)
 (load "config-general")            ;; Load general settings and customizations
-(load "config-language-server")    ;; Load settings for language server protocol
+(load "config-eglot")    ;; Load settings for language server protocol
 (load "config-lsp")                ;; Load specific configuration for LSP
 (load "config-packages")           ;; Load package management settings
 (load "config-projectile")         ;; Load configuration for Projectile (project management)
@@ -11,6 +11,7 @@
 (load "config-gptel.el")             ;; Load GPTEL Azure backend
 ;; Set the auth sources for authentication
 (setq auth-sources '("~/.authinfo")) ;; Specify location of auth info
+(setq rustic-cargo-bin "/home/david/.cargo/bin/cargo")
 
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -55,15 +56,16 @@
      ("melpa-stable" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
    '(## all-the-icons clang-format clang-format+ counsel
-	counsel-projectile dap-mode dape dashboard ef-themes eglot
-	eglot-booster elpy flycheck flycheck-rust geiser-mit gptel ivy
-	lsp-pyright lsp-ui magit nerd-icons nerd-icons-ivy-rich
-	olivetti page-break-lines pdf-tools py-autopep8 py-isort
-	pyenv-mode pyvenv rainbow-identifiers rust-mode rustic
-	smartparens solarized-theme timu-rouge-theme treemacs
-	treemacs-evil treemacs-icons-dired treemacs-persp
-	treemacs-projectile treemacs-tab-bar typescript-mode
-	use-package vterm vterm-toggle zenburn-theme))
+	counsel-projectile dap-mode dape dashboard direnv ef-themes
+	eglot eglot-booster elpy envrc flycheck flycheck-rust
+	geiser-mit gptel ivy json-mode lsp-pyright lsp-ui magit
+	nerd-icons nerd-icons-ivy-rich olivetti page-break-lines
+	pdf-tools py-autopep8 py-isort pyenv-mode pyvenv
+	rainbow-identifiers rust-mode rustic smartparens
+	solarized-theme timu-rouge-theme treemacs treemacs-evil
+	treemacs-icons-dired treemacs-persp treemacs-projectile
+	treemacs-tab-bar typescript-mode use-package vterm
+	vterm-toggle zenburn-theme))
  '(package-vc-selected-packages
    '((eglot-booster :vc-backend Git :url
 		    "https://github.com/jdtsmith/eglot-booster.git")))
@@ -80,3 +82,4 @@
  '(default ((t (:family "0xProto Nerd Font Mono" :foundry "0xTy" :slant normal :weight regular :height 113 :width normal)))))
 
 (setq x-super-keysym 'capslock)
+(envrc-global-mode)
