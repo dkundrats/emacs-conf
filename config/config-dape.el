@@ -19,3 +19,20 @@
                :type "python"
                :justMyCode nil
                :showReturnValue t))
+
+(add-to-list 'dape-configs
+             '(gdb-rust
+               modes (rust-mode rustic-mode)
+               command "gdb"
+               command-args ("-i=mi" "--interpreter=mi2")
+               command-cwd (lambda () default-directory)
+               target (lambda () 
+                        (let ((target-dir (concat (locate-dominating-file default-directory "Cargo.toml")
+                                                 "target/debug/")))
+                          (expand-file-name
+                           (concat target-dir
+                                  (file-name-base
+                                   (directory-file-name
+                                    (locate-dominating-file default-directory "Cargo.toml")))))))
+               :type "gdb"
+               :request "launch"))
