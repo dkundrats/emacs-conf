@@ -48,11 +48,8 @@
                         env))
     :server-id 'pyright
     :multi-root nil
-    :priority 1))
-  (lsp-register-client
- (make-lsp-client :new-connection (lsp-stdio-connection "clangd")
-                  :major-modes '(c-mode)
-                  :server-id 'clangd))
+ :priority 1))
+ 
   (setq lsp-disabled-clients '(jedi)))
 
 (use-package lsp-ui
@@ -133,3 +130,4 @@
 ;; Automatically start LSP in Python mode
 (add-hook 'python-mode-hook #'lsp-deferred)
 (global-set-key (kbd "C-c d") 'show-static-lsp-doc)
+(global-set-key (kbd "C-c e l d") 'eldoc-doc-buffer)

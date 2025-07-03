@@ -19,9 +19,9 @@
 (setq org-agenda-files '("~/org/sprint.org"))
 
 (require 'ef-themes)
-
-(load-theme 'ef-elea-dark :no-confirm)
-
+(load-theme 'catppuccin :no-confirm)
+(setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
+(catppuccin-reload)
 ;; No sound
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
@@ -55,7 +55,7 @@
      ("melpa" . "https://melpa.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(## all-the-icons clang-format clang-format+ counsel
+   '(## all-the-icons catppuccin-theme clang-format clang-format+ counsel
 	counsel-projectile dap-mode dape dashboard direnv ef-themes
 	eglot eglot-booster elpy envrc flycheck flycheck-rust
 	geiser-mit gptel ivy json-mode lsp-pyright lsp-ui magit
