@@ -37,8 +37,8 @@
 ;;                      dashboard-insert-items)))
 
 ;; PDF Tools
-(pdf-tools-install)
-(pdf-loader-install)
+;;(pdf-tools-install)
+;;(pdf-loader-install)
 
 ;; Projectile
 (use-package projectile
@@ -68,8 +68,8 @@
   :ensure t
   :config (helm-mode 1))
 
-(pdf-tools-install)  ; Standard activation command
-(pdf-loader-install) ; On demand loading, leads to faster startup time
+;;(pdf-tools-install)  ; Standard activation command
+;;(pdf-loader-install) ; On demand loading, leads to faster startup time
 
 ;;org mode
 (require 'org)

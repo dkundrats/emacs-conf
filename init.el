@@ -3,21 +3,23 @@
 
 (load "config-dape")               ;; Load configuration for DAP (Debug Adapter Protocol)
 (load "config-general")            ;; Load general settings and customizations
-(load "config-eglot")    ;; Load settings for language server protocol
+;;(load "config-eglot")    ;; Load settings for language server protocol
 (load "config-lsp")                ;; Load specific configuration for LSP
 (load "config-packages")           ;; Load package management settings
 (load "config-projectile")         ;; Load configuration for Projectile (project management)
 (load "config-ui-misc")            ;; Load miscellaneous UI customizations
-(load "config-gptel.el")             ;; Load GPTEL Azure backend
+;;(load "config-gptel.el")             ;; Load GPTEL Azure backend
 ;; Set the auth sources for authentication
 (setq auth-sources '("~/.authinfo")) ;; Specify location of auth info
-(setq rustic-cargo-bin "/home/david/.cargo/bin/cargo")
-
+(setq rustic-cargo-bin "~/.cargo/bin/cargo")
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 (setq org-agenda-files '("~/org/sprint.org"))
-
+(require 'dap-gdb)
 (require 'ef-themes)
 (load-theme 'catppuccin :no-confirm)
 (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
@@ -55,17 +57,13 @@
      ("melpa" . "https://melpa.org/packages/")
      ("melpa-stable" . "https://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(## all-the-icons catppuccin-theme clang-format clang-format+ counsel
-	counsel-projectile dap-mode dape dashboard direnv ef-themes
-	eglot eglot-booster elpy envrc flycheck flycheck-rust
-	geiser-mit gptel ivy json-mode lsp-pyright lsp-ui magit
-	nerd-icons nerd-icons-ivy-rich olivetti page-break-lines
-	pdf-tools py-autopep8 py-isort pyenv-mode pyvenv
-	rainbow-identifiers rust-mode rustic smartparens
-	solarized-theme timu-rouge-theme treemacs treemacs-evil
-	treemacs-icons-dired treemacs-persp treemacs-projectile
-	treemacs-tab-bar typescript-mode use-package vterm
-	vterm-toggle zenburn-theme))
+   '(all-the-icons catppuccin-theme company dap-mode dape diff-hl direnv
+		   ef-themes envrc evil-mc exec-path-from-shell
+		   flycheck helm ivy lsp-pyright lsp-ui magit mame
+		   nerd-icons pyenv-mode quelpa-use-package rustic
+		   treemacs-evil treemacs-icons-dired treemacs-persp
+		   treemacs-projectile treemacs-tab-bar vterm
+		   yasnippet))
  '(package-vc-selected-packages
    '((eglot-booster :vc-backend Git :url
 		    "https://github.com/jdtsmith/eglot-booster.git")))
@@ -79,7 +77,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "0xProto Nerd Font Mono" :foundry "0xTy" :slant normal :weight regular :height 113 :width normal)))))
+ '(default ((t (:family "0xProto Nerd Font Mono" :foundry "0xTy" :slant normal :weight regular :height 130 :width normal)))))
 
 (setq x-super-keysym 'capslock)
+
+;; Configure magit to open in new vertical buffer
+(setq magit-display-buffer-function
+      (lambda (buffer)
+        (display-buffer buffer '((display-buffer-pop-up-window)
+                                 (window-width . 0.5)
+                                 (side . right)))))
+
 (envrc-global-mode)

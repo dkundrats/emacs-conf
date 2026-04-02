@@ -1,3 +1,28 @@
+;; Evil mode - vim keybindings for text editing
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)  ;; required for evil-collection
+  (setq evil-want-C-u-scroll t)
+  :config
+  (evil-mode 1)
+  ;; Use emacs bindings in these modes
+  (dolist (mode '(ivy-mode
+                  helm-mode
+                  minibuffer-mode
+                  magit-mode
+                  magit-status-mode
+                  magit-diff-mode
+                  magit-log-mode
+                  treemacs-mode
+                  vterm-mode
+                  dired-mode
+                  shell-mode
+                  eshell-mode
+                  org-agenda-mode))
+    (evil-set-initial-state mode 'emacs)))
+
 ;; Maximize frame on startup
 (add-hook 'window-setup-hook 'toggle-frame-maximized t)
 

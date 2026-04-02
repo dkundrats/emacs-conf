@@ -12,6 +12,7 @@
   (lsp-rust-analyzer-cargo-watch-command "clippy")
   (lsp-eldoc-render-all t)
   (lsp-idle-delay 0.6)
+  (lsp-response-timeout 30)
   ;; enable / disable the hints as you prefer:
   (lsp-inlay-hint-enable t)
   ;; These are optional configurations. See https://emacs-lsp.github.io/lsp-mode/page/lsp-rust-analyzer/#lsp-rust-analyzer-display-chaining-hints for a full list
@@ -36,19 +37,6 @@
     :new-connection (lsp-stdio-connection '("node" "/home/david/Downloads/git/yaml-language-server/out/server/src/server.js" "--stdio"))
     :major-modes '(yaml-mode)
     :server-id 'yaml-language-server))
-  (lsp-register-client
-   (make-lsp-client 
-    :new-connection (lsp-stdio-connection '("pyright-langserver" "--stdio"))
-    :activation-fn (lsp-activate-on "python")
-    :major-modes '(python-mode)
-    :environment-fn (lambda () 
-                      (let ((env process-environment))
-                        (direnv-update-directory-environment)
-                        env))
-    :server-id 'pyright
-    :multi-root nil
- :priority 1))
- 
   (setq lsp-disabled-clients '(jedi)))
 
 (use-package lsp-ui
@@ -62,10 +50,14 @@
   (flycheck-mode -1))
 
 (add-hook 'rust-mode-hook #'disable-flycheck-in-rust-mode)
-(setq lsp-pyright-typechecking-mode "basic")
-(setq lsp-pyright-multi-root nil)
-(setq lsp-pyright-use-library-code-for-types t)
-(setq lsp-pyright-venv-path nil)
+(use-package lsp-pyright
+  :ensure t
+  :custom
+  (lsp-pyright-langserver-command "basedpyright")
+  (lsp-pyright-typechecking-mode "basic")
+  (lsp-pyright-multi-root nil)
+  (lsp-pyright-use-library-code-for-types t)
+  (lsp-pyright-venv-path nil))
 (setq rustic-analyzer-command '("emacs-lsp-booster -- ~/.cargo/bin/rust-analyzer"))
 
 ;; DAP mode for debugging
@@ -98,25 +90,6 @@
     (lsp-workspace-shutdown (lsp-workspaces))
     (lsp)))
 
-;; Hook to apply when changing buffers or directories
-(add-hook 'hack-local-variables-hook
-          (lambda ()
-            (when (and (derived-mode-p 'python-mode)
-                       (buffer-file-name))
-              (direnv-update-directory-environment)
-              (my/restart-lsp-with-current-env))))
-;; Add a function that runs when switching buffers
-(defun my/check-python-env-change ()
-  "Check if Python buffer changed directories and restart LSP if needed."
-  (when (and (derived-mode-p 'python-mode)
-             (buffer-file-name)
-             lsp-mode)
-    (let ((current-dir (file-name-directory (buffer-file-name)))
-          (workspace-dir (lsp-workspace-root)))
-      (unless (string-prefix-p workspace-dir current-dir)
-        (direnv-update-directory-environment)
-        (lsp-workspace-restart)))))
-
 (defun my/lsp-reset-python-env ()
   "Force reset of Python LSP with current environment."
   (interactive)
@@ -124,9 +97,16 @@
   (lsp-restart-workspace))
 
 (global-set-key (kbd "C-c r") #'my/lsp-reset-python-env)
-;; Add to focus hooks to detect project changes
-(add-hook 'buffer-list-update-hook #'my/check-python-env-change)
 ;; Automatically start LSP in Python mode
 (add-hook 'python-mode-hook #'lsp-deferred)
 (global-set-key (kbd "C-c d") 'show-static-lsp-doc)
 (global-set-key (kbd "C-c e l d") 'eldoc-doc-buffer)
+(add-hook 'python-mode-hook 'hs-minor-mode)
+
+(use-package eglot
+  :config
+  (add-to-list 'eglot-server-programs '((sh-mode bash-ts-mode) . ("bash-language-server" "start")))
+
+  :hook
+  (sh-mode . eglot-ensure)
+  (bash-ts-mode . eglot-ensure))
